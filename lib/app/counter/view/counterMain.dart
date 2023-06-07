@@ -1,5 +1,6 @@
 import 'package:counter2point0/app/counter/view/buttonsRow.dart';
 import 'package:counter2point0/app/counter/view/editableCounter.dart';
+import 'package:counter2point0/app/darkmode/view/modeButton.dart';
 import 'package:counter2point0/app/root.dart';
 import 'package:flutter/material.dart';
 
@@ -16,8 +17,6 @@ class _CounterMainState extends State<CounterMain> {
 
   final TextEditingController _counterController = TextEditingController();
 
-  bool isDarkMode(context) => Theme.of(context).brightness == Brightness.dark;
-
   void setCounter(int value) {
     setState(() {
       _counter = value;
@@ -25,7 +24,7 @@ class _CounterMainState extends State<CounterMain> {
   }
 
   void changeTheme() {
-    MyApp.of(context).changeTheme(ThemeMode.light);
+    // MyApp.of(context).changeTheme(ThemeMode.light);
   }
 
   @override
@@ -37,11 +36,7 @@ class _CounterMainState extends State<CounterMain> {
         title: const Text('Counter 2.0'),
         centerTitle: true,
         actions: [
-          IconButton(
-              onPressed: () => MyApp.of(context).changeTheme(
-                  isDarkMode(context) ? ThemeMode.light : ThemeMode.dark),
-              icon: Icon(
-                  isDarkMode(context) ? Icons.light_mode : Icons.dark_mode))
+          ModeButton(),
         ],
       ),
       body: Center(

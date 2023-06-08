@@ -1,6 +1,4 @@
-import 'package:counter2point0/theme/controller/controller.dart';
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+part of 'view.dart';
 
 class ModeButton extends StatefulWidget {
   const ModeButton({super.key});

@@ -1,8 +1,7 @@
-import 'package:counter2point0/widgets/widgets.dart';
-import 'package:flutter/material.dart';
+part of 'view.dart';
 
-class EditableCounter extends StatelessWidget {
-  EditableCounter({
+class EditableCounter extends StatefulWidget {
+  const EditableCounter({
     super.key,
     required this.setCounter,
     required this.setEditing,
@@ -12,7 +11,13 @@ class EditableCounter extends StatelessWidget {
   final Function(bool) setEditing;
   final int counter;
 
+  @override
+  State<EditableCounter> createState() => _EditableCounterState();
+}
+
+class _EditableCounterState extends State<EditableCounter> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
   final TextEditingController _counterController = TextEditingController();
 
   @override
@@ -23,7 +28,7 @@ class EditableCounter extends StatelessWidget {
           key: _formKey,
           child: TextFieldCustom(
             controller: _counterController,
-            initialVal: '$counter',
+            initialVal: '${widget.counter}',
             validate: (value) {
               if (value == null || !RegExp(r'^-?\d+$').hasMatch(value)) {
                 return "Value must be an integer";
@@ -40,7 +45,7 @@ class EditableCounter extends StatelessWidget {
             children: [
               Btn(
                 title: 'Cancel',
-                onPressed: () => setEditing(false),
+                onPressed: () => widget.setEditing(false),
               ),
               const SizedBox(width: 30),
               Btn(
@@ -49,8 +54,8 @@ class EditableCounter extends StatelessWidget {
                   onPressed: () {
                     final FormState form = _formKey.currentState as FormState;
                     if (form.validate()) {
-                      setEditing(false);
-                      setCounter(_counterController.text.isEmpty
+                      widget.setEditing(false);
+                      widget.setCounter(_counterController.text.isEmpty
                           ? 0
                           : int.parse(_counterController.text));
                     }
@@ -60,5 +65,11 @@ class EditableCounter extends StatelessWidget {
         ),
       ],
     );
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _counterController.dispose();
   }
 }

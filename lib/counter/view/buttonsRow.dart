@@ -1,5 +1,4 @@
-import 'package:counter2point0/counter/controller/counterController.dart';
-import 'package:flutter/material.dart';
+part of 'view.dart';
 
 class ButtonsRow extends StatelessWidget {
   const ButtonsRow(

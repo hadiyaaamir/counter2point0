@@ -1,7 +1,7 @@
-import 'package:flutter/material.dart';
+part of 'controller.dart';
 
 class ThemeController extends ChangeNotifier {
-  ThemeMode _themeMode = ThemeMode.system;
+  // ThemeMode _themeMode = ThemeMode.system;
   ThemeMode get themeMode => _isDarkMode ? ThemeMode.dark : ThemeMode.light;
 
   bool _isDarkMode =
@@ -10,8 +10,6 @@ class ThemeController extends ChangeNotifier {
   bool get isDarkMode => _isDarkMode;
 
   toggleMode() {
-    _themeMode =
-        _themeMode == ThemeMode.light ? ThemeMode.dark : ThemeMode.light;
     _isDarkMode = !_isDarkMode;
     notifyListeners();
   }

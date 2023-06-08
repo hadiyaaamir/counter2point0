@@ -1,7 +1,4 @@
-import 'package:counter2point0/counter/view/buttonsRow.dart';
-import 'package:counter2point0/counter/view/editableCounter.dart';
-import 'package:counter2point0/theme/view/modeButton.dart';
-import 'package:flutter/material.dart';
+part of 'view.dart';
 
 class CounterMain extends StatefulWidget {
   const CounterMain({super.key});

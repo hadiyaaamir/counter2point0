@@ -16,6 +16,7 @@ class ThemeController extends ChangeNotifier {
 
   toggleMode() {
     isDarkMode ? _themeMode = ThemeMode.light : _themeMode = ThemeMode.dark;
+
     notifyListeners();
   }
 }

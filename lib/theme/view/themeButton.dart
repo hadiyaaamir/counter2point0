@@ -26,6 +26,15 @@ class _ThemeButtonState extends State<ThemeButton> {
       },
       icon: AnimatedSwitcher(
           duration: const Duration(milliseconds: 500),
+          transitionBuilder: (Widget child, Animation<double> animation) {
+            return FadeTransition(
+              opacity: animation,
+              child: ScaleTransition(
+                scale: animation,
+                child: child,
+              ),
+            );
+          },
           child: themeController.isDarkMode
               ? const Icon(key: Key('1'), Icons.light_mode)
               : const Icon(key: Key('2'), Icons.dark_mode)),

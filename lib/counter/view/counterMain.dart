@@ -19,10 +19,6 @@ class _CounterMainState extends State<CounterMain> {
     });
   }
 
-  void changeTheme() {
-    // MyApp.of(context).changeTheme(ThemeMode.light);
-  }
-
   @override
   Widget build(BuildContext context) {
     _counterController.text = "$_counter";
@@ -31,8 +27,8 @@ class _CounterMainState extends State<CounterMain> {
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: const Text('Counter 2.0'),
         centerTitle: true,
-        actions: [
-          ModeButton(),
+        actions: const [
+          ThemeButton(),
         ],
       ),
       body: Center(

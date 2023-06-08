@@ -1,3 +1,4 @@
+import 'package:animated_theme_switcher/animated_theme_switcher.dart';
 import 'package:counter2point0/app/darkmode/business_logic/modeController.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -14,11 +15,11 @@ class _ModeButtonState extends State<ModeButton> {
 
   @override
   Widget build(BuildContext context) {
-    return IconButton(
-      onPressed: () => context.read<ModeController>().toggleMode(),
-      // MyApp.of(context).changeTheme(
-      //     isDarkMode(context) ? ThemeMode.light : ThemeMode.dark),
-      icon: Icon(isDarkMode(context) ? Icons.light_mode : Icons.dark_mode),
-    );
+    return ThemeSwitcher(builder: (context) {
+      return IconButton(
+        onPressed: () => context.read<ModeController>().toggleMode(),
+        icon: Icon(isDarkMode(context) ? Icons.light_mode : Icons.dark_mode),
+      );
+    });
   }
 }

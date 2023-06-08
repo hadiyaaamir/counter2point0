@@ -1,6 +1,4 @@
-import 'package:counter2point0/app/darkmode/business_logic/modeController.dart';
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+part of 'view.dart';
 
 class ModeButton extends StatefulWidget {
   const ModeButton({super.key});
@@ -15,9 +13,7 @@ class _ModeButtonState extends State<ModeButton> {
   @override
   Widget build(BuildContext context) {
     return IconButton(
-      onPressed: () => context.read<ModeController>().toggleMode(),
-      // MyApp.of(context).changeTheme(
-      //     isDarkMode(context) ? ThemeMode.light : ThemeMode.dark),
+      onPressed: () => context.read<ThemeController>().toggleMode(),
       icon: Icon(isDarkMode(context) ? Icons.light_mode : Icons.dark_mode),
     );
   }

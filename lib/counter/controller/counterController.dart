@@ -1,3 +1,5 @@
+part of 'controller.dart';
+
 class CounterController {
   int increment(int current) {
     return ++current;

@@ -2,14 +2,14 @@ import 'package:counter2point0/counter/counter.dart';
 import 'package:counter2point0/theme/theme.dart';
 import 'package:flutter/material.dart';
 
-class MyApp extends StatefulWidget {
-  const MyApp({super.key});
+class CounterApp extends StatefulWidget {
+  const CounterApp({super.key});
 
   @override
-  State<MyApp> createState() => _MyAppState();
+  State<CounterApp> createState() => _CounterAppState();
 }
 
-class _MyAppState extends State<MyApp> {
+class _CounterAppState extends State<CounterApp> {
   final ThemeController themeController = ThemeController();
   @override
   void initState() {

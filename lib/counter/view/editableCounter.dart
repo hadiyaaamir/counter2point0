@@ -1,4 +1,4 @@
-import 'package:counter2point0/app/widgets/widgets.dart';
+import 'package:counter2point0/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 
 class EditableCounter extends StatelessWidget {

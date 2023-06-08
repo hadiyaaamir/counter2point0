@@ -1,5 +1,5 @@
-import 'package:counter2point0/app/counter/view/counterMain.dart';
-import 'package:counter2point0/app/darkmode/business_logic/modeController.dart';
+import 'package:counter2point0/counter/view/counterMain.dart';
+import 'package:counter2point0/theme/controller/modeController.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -8,7 +8,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ThemeMode themeMode = context.watch<ModeController>().themeMode;
+    ThemeMode themeMode = context.watch<ThemeController>().themeMode;
 
     return MaterialApp(
       title: 'Counter 2.0',

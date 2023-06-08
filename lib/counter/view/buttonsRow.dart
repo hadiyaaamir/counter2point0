@@ -1,4 +1,4 @@
-import 'package:counter2point0/app/counter/business_logic/counterController.dart';
+import 'package:counter2point0/counter/controller/counterController.dart';
 import 'package:flutter/material.dart';
 
 class ButtonsRow extends StatelessWidget {

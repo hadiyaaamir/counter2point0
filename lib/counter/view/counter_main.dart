@@ -8,20 +8,25 @@ class CounterMain extends StatefulWidget {
 }
 
 class _CounterMainState extends State<CounterMain> {
-  int _counter = 0;
-  bool editing = false;
+  // int _counter = 0;
+  // bool editing = false;
 
-  final TextEditingController _counterController = TextEditingController();
+  // final TextEditingController _counterController = TextEditingController();
 
-  void setCounter(int value) {
+  Counter _counter = Counter(
+    counter: 0,
+    editing: false,
+    counterController: TextEditingController(text: '0'),
+  );
+
+  void setCounter(Counter c) {
     setState(() {
-      _counter = value;
+      _counter = c;
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    _counterController.text = "$_counter";
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
@@ -44,23 +49,24 @@ class _CounterMainState extends State<CounterMain> {
             //number
             Padding(
               padding: EdgeInsets.symmetric(
-                  horizontal: 30, vertical: editing ? 5 : 10),
-              child: editing
+                  horizontal: 30, vertical: _counter.editing ? 5 : 10),
+              child: _counter.editing
                   //editable number
                   ? EditableCounter(
                       counter: _counter,
                       setCounter: setCounter,
-                      setEditing: (bool edit) => setState(() => editing = edit),
+                      setEditing: (bool edit) =>
+                          setState(() => _counter = _counter.setEditing(edit)),
                     )
 
                   //clickable number
                   : GestureDetector(
                       child: Text(
-                        '$_counter',
+                        '${_counter.counter}',
                         style: Theme.of(context).textTheme.headlineMedium,
                       ),
                       onTap: () {
-                        setState(() => editing = !editing);
+                        setState(() => _counter = _counter.toggleEditing());
                       },
                     ),
             ),
@@ -69,7 +75,7 @@ class _CounterMainState extends State<CounterMain> {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: ButtonsRow(
-        isVisible: !editing,
+        isVisible: !_counter.editing,
         counter: _counter,
         setCounter: setCounter,
       ),

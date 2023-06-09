@@ -1,15 +1,19 @@
 part of 'controller.dart';
 
 class CounterController {
-//   int increment(int current) {
-//     return ++current;
-//   }
+  getFontSize(int n, Counter c) {
+    int numbers = c.max - c.min + 1;
+    double sizeFactor = (c.maxFont - c.minFont) / numbers;
 
-//   int decrement(int current) {
-//     return --current;
-//   }
+    int myNumber = (n - c.min + 1);
 
-//   int reset() {
-//     return 0;
-//   }
+    double fontSize = myNumber * sizeFactor + c.minFont;
+
+    print('numbers: $numbers');
+    print('size factor: $sizeFactor');
+    print('i am $n, the ${myNumber}th number');
+    print('font size: $fontSize');
+
+    return fontSize;
+  }
 }

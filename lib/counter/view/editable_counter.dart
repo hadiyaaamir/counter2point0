@@ -58,13 +58,9 @@ class _EditableCounterState extends State<EditableCounter> {
                   onPressed: () {
                     final FormState form = _formKey.currentState as FormState;
                     if (form.validate()) {
-                      widget.setEditing(false);
-                      widget.setCounter(
-                        Counter(
-                          counter: int.parse(counterController.text),
-                          editing: false,
-                        ),
-                      );
+                      // widget.setEditing(false);
+                      widget.setCounter(widget.counter.setCounterAndExitEdit(
+                          int.parse(counterController.text)));
                     }
                   }),
             ],

@@ -1,11 +1,12 @@
 part of 'view.dart';
 
 class ButtonsRow extends StatelessWidget {
-  const ButtonsRow(
-      {super.key,
-      required this.isVisible,
-      required this.setCounter,
-      required this.counter});
+  const ButtonsRow({
+    super.key,
+    required this.isVisible,
+    required this.setCounter,
+    required this.counter,
+  });
 
   final bool isVisible;
   final Function(Counter) setCounter;
@@ -19,7 +20,9 @@ class ButtonsRow extends StatelessWidget {
         if (isVisible) ...[
           //subtract
           FloatingActionButton(
-            onPressed: () => setCounter(counter.decrement()),
+            onPressed: () {
+              setCounter(counter.decrement());
+            },
             tooltip: 'Decrement',
             child: const Icon(Icons.remove),
           ),

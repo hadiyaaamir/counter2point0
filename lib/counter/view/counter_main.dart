@@ -45,11 +45,14 @@ class _CounterMainState extends State<CounterMain> {
               padding: EdgeInsets.symmetric(
                   horizontal: 30, vertical: _counter.editing ? 5 : 10),
               child: AnimatedSwitcher(
-                duration: const Duration(milliseconds: 750),
+                duration: const Duration(milliseconds: 700),
                 transitionBuilder: (Widget child, Animation<double> animation) {
-                  return ScaleTransition(
-                    scale: animation,
-                    child: child,
+                  return FadeTransition(
+                    opacity: animation,
+                    child: ScaleTransition(
+                      scale: animation,
+                      child: child,
+                    ),
                   );
                 },
                 child: _counter.editing

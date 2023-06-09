@@ -7,10 +7,15 @@ class Counter {
 
   final TextEditingController counterController;
 
+  final int max;
+  final int min;
+
   const Counter({
     required this.counter,
     required this.editing,
     required this.counterController,
+    this.min = -250,
+    this.max = 250,
   });
 
   Counter setCounter(int value) {
@@ -18,30 +23,42 @@ class Counter {
       counter: value,
       editing: editing,
       counterController: TextEditingController(text: '$value'),
+      min: min,
+      max: max,
     );
   }
 
   Counter increment() {
+    if (counter == max) return this;
     return Counter(
       counter: counter + 1,
       editing: editing,
       counterController: TextEditingController(text: '${counter + 1}'),
+      min: min,
+      max: max,
     );
   }
 
   Counter decrement() {
+    if (counter == min) return this;
     return Counter(
       counter: counter - 1,
       editing: editing,
       counterController: TextEditingController(text: '${counter - 1}'),
+      min: min,
+      max: max,
     );
   }
 
   Counter reset() {
+    int resetVal = min <= 0 ? 0 : min;
+
     return Counter(
-      counter: 0,
+      counter: resetVal,
       editing: editing,
-      counterController: TextEditingController(text: '${0}'),
+      counterController: TextEditingController(text: '$resetVal'),
+      min: min,
+      max: max,
     );
   }
 
@@ -50,6 +67,8 @@ class Counter {
       counter: counter,
       editing: !editing,
       counterController: TextEditingController(text: '$counter'),
+      min: min,
+      max: max,
     );
   }
 
@@ -58,6 +77,8 @@ class Counter {
       counter: counter,
       editing: edit,
       counterController: TextEditingController(text: '$counter'),
+      min: min,
+      max: max,
     );
   }
 
@@ -66,6 +87,8 @@ class Counter {
       counter: counter,
       editing: editing,
       counterController: TextEditingController(text: text),
+      min: min,
+      max: max,
     );
   }
 }

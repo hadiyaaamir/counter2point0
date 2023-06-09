@@ -32,6 +32,10 @@ class _EditableCounterState extends State<EditableCounter> {
             validate: (value) {
               if (value == null || !RegExp(r'^-?\d+$').hasMatch(value)) {
                 return "Value must be an integer";
+              } else if (int.parse(value) > widget.counter.max) {
+                return "Value must be less than ${widget.counter.max}";
+              } else if (int.parse(value) < widget.counter.min) {
+                return "Value must be greater than ${widget.counter.min}";
               }
               return null;
             },

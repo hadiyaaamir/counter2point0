@@ -1,6 +1,4 @@
-import 'package:counter2point0/counter/counter.dart';
-import 'package:counter2point0/theme/theme.dart';
-import 'package:flutter/material.dart';
+part of 'view.dart';
 
 class CounterApp extends StatefulWidget {
   const CounterApp({super.key});
@@ -23,13 +21,17 @@ class _CounterAppState extends State<CounterApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Counter 2.0',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      darkTheme: ThemeData.dark(useMaterial3: true),
+      // theme: ThemeData(
+      //   colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+      //   useMaterial3: true,
+      // ),
+      // darkTheme: ThemeData.dark(useMaterial3: true),
       themeMode: themeController.themeMode,
-      home: const CounterMain(),
+      home: AnimatedTheme(
+        data: themeController.themeData,
+        duration: const Duration(milliseconds: 500),
+        child: const CounterMain(),
+      ),
     );
   }
 }

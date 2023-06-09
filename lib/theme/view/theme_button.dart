@@ -8,7 +8,6 @@ class ThemeButton extends StatefulWidget {
 }
 
 class _ThemeButtonState extends State<ThemeButton> {
-  bool isDarkMode(context) => Theme.of(context).brightness == Brightness.dark;
   final ThemeController themeController = ThemeController();
 
   @override
@@ -25,7 +24,20 @@ class _ThemeButtonState extends State<ThemeButton> {
       onPressed: () {
         themeController.toggleMode();
       },
-      icon: Icon(isDarkMode(context) ? Icons.light_mode : Icons.dark_mode),
+      icon: AnimatedSwitcher(
+          duration: const Duration(milliseconds: 500),
+          transitionBuilder: (Widget child, Animation<double> animation) {
+            return FadeTransition(
+              opacity: animation,
+              child: ScaleTransition(
+                scale: animation,
+                child: child,
+              ),
+            );
+          },
+          child: themeController.isDarkMode
+              ? const Icon(key: Key('1'), Icons.light_mode)
+              : const Icon(key: Key('2'), Icons.dark_mode)),
     );
   }
 }

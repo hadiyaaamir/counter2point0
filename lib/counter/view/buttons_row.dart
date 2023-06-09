@@ -8,8 +8,8 @@ class ButtonsRow extends StatelessWidget {
       required this.counter});
 
   final bool isVisible;
-  final Function(int) setCounter;
-  final int counter;
+  final Function(Counter) setCounter;
+  final Counter counter;
 
   @override
   Widget build(BuildContext context) {
@@ -19,15 +19,15 @@ class ButtonsRow extends StatelessWidget {
         if (isVisible) ...[
           //subtract
           FloatingActionButton(
-            onPressed: () => setCounter(CounterController().decrement(counter)),
+            onPressed: () => setCounter(counter.decrement()),
             tooltip: 'Decrement',
             child: const Icon(Icons.remove),
           ),
 
           //reset
-          if (counter != 0) ...[
+          if (counter.counter != 0) ...[
             FloatingActionButton(
-              onPressed: () => setCounter(CounterController().reset()),
+              onPressed: () => setCounter(counter.reset()),
               tooltip: 'Reset',
               child: const Icon(Icons.refresh),
             ),
@@ -35,7 +35,7 @@ class ButtonsRow extends StatelessWidget {
 
           //add
           FloatingActionButton(
-            onPressed: () => setCounter(CounterController().increment(counter)),
+            onPressed: () => setCounter(counter.increment()),
             tooltip: 'Increment',
             child: const Icon(Icons.add),
           ),

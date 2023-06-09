@@ -2,4 +2,4 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 
-part 'themeController.dart';
+part 'theme_controller.dart';

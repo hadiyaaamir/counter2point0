@@ -30,6 +30,18 @@ class _CounterMainState extends State<CounterMain> {
     setState(() {
       _counter = c;
     });
+    if (_counter.counter == _counter.max || _counter.counter == _counter.min) {
+      final snackBar = SnackBar(
+        content: Text('You have reached the'
+            '${_counter.counter == _counter.max ? ' maximum ' : ' minimum '}'
+            'value'),
+        action: SnackBarAction(
+          label: 'Okay',
+          onPressed: () {},
+        ),
+      );
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    }
   }
 
   final ThemeController themeController = ThemeController();

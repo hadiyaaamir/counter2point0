@@ -11,19 +11,19 @@ class _CounterMainState extends State<CounterMain> {
   Counter _counter = const Counter(
     counter: 0,
     editing: false,
-    min: -10,
+    min: -50,
     max: 50,
     maxFont: 200,
     minFont: 10,
-    fontSize: 10,
   );
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _counter = _counter.setFontSize(
         CounterController().getFontSize(_counter.counter, _counter));
+    _counter = _counter
+        .setColor(CounterController().getColor(_counter.counter, _counter));
   }
 
   void setCounter(Counter c) {
@@ -31,6 +31,8 @@ class _CounterMainState extends State<CounterMain> {
       _counter = c;
     });
   }
+
+  final ThemeController themeController = ThemeController();
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +60,7 @@ class _CounterMainState extends State<CounterMain> {
                 padding: EdgeInsets.symmetric(
                     horizontal: 30, vertical: _counter.editing ? 5 : 10),
                 child: AnimatedSwitcher(
-                  duration: const Duration(milliseconds: 250),
+                  duration: const Duration(milliseconds: 400),
                   transitionBuilder:
                       (Widget child, Animation<double> animation) {
                     return FadeTransition(
@@ -81,14 +83,27 @@ class _CounterMainState extends State<CounterMain> {
                       //clickable number
                       : GestureDetector(
                           key: const Key('normal counter'),
-                          child: AnimatedDefaultTextStyle(
-                            duration: const Duration(milliseconds: 400),
-                            style: TextStyle(
-                                fontSize: _counter.fontSize,
-                                color: Colors.black),
-                            child: Text(
-                              '${_counter.counter}',
-                            ),
+                          child: ListenableBuilder(
+                            listenable: themeController,
+                            builder: (BuildContext context, Widget? child) {
+                              return AnimatedDefaultTextStyle(
+                                duration: const Duration(milliseconds: 400),
+                                style: TextStyle(
+                                  fontSize: _counter.fontSize,
+                                  color: themeController.isDarkMode
+                                      ? Color.fromARGB(
+                                          255,
+                                          255,
+                                          255 - _counter.color,
+                                          255 - _counter.color)
+                                      : Color.fromARGB(
+                                          255, _counter.color, 0, 0),
+                                ),
+                                child: Text(
+                                  '${_counter.counter}',
+                                ),
+                              );
+                            },
                           ),
                           onTap: () {
                             setState(() => _counter = _counter.toggleEditing());

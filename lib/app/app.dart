@@ -1,2 +1,1 @@
-export 'view/widgets/widgets.dart';
-export 'counter_app.dart';
+export 'view/view.dart';

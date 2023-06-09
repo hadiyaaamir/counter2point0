@@ -8,15 +8,9 @@ class CounterMain extends StatefulWidget {
 }
 
 class _CounterMainState extends State<CounterMain> {
-  // int _counter = 0;
-  // bool editing = false;
-
-  // final TextEditingController _counterController = TextEditingController();
-
-  Counter _counter = Counter(
+  Counter _counter = const Counter(
     counter: 0,
     editing: false,
-    counterController: TextEditingController(text: '0'),
   );
 
   void setCounter(Counter c) {
@@ -50,25 +44,36 @@ class _CounterMainState extends State<CounterMain> {
             Padding(
               padding: EdgeInsets.symmetric(
                   horizontal: 30, vertical: _counter.editing ? 5 : 10),
-              child: _counter.editing
-                  //editable number
-                  ? EditableCounter(
-                      counter: _counter,
-                      setCounter: setCounter,
-                      setEditing: (bool edit) =>
-                          setState(() => _counter = _counter.setEditing(edit)),
-                    )
+              child: AnimatedSwitcher(
+                duration: const Duration(milliseconds: 750),
+                transitionBuilder: (Widget child, Animation<double> animation) {
+                  return ScaleTransition(
+                    scale: animation,
+                    child: child,
+                  );
+                },
+                child: _counter.editing
+                    //editable number
+                    ? EditableCounter(
+                        key: const Key('editable counter'),
+                        counter: _counter,
+                        setCounter: setCounter,
+                        setEditing: (bool edit) => setState(
+                            () => _counter = _counter.setEditing(edit)),
+                      )
 
-                  //clickable number
-                  : GestureDetector(
-                      child: Text(
-                        '${_counter.counter}',
-                        style: Theme.of(context).textTheme.headlineMedium,
+                    //clickable number
+                    : GestureDetector(
+                        key: const Key('normal counter'),
+                        child: Text(
+                          '${_counter.counter}',
+                          style: Theme.of(context).textTheme.headlineMedium,
+                        ),
+                        onTap: () {
+                          setState(() => _counter = _counter.toggleEditing());
+                        },
                       ),
-                      onTap: () {
-                        setState(() => _counter = _counter.toggleEditing());
-                      },
-                    ),
+              ),
             ),
           ],
         ),

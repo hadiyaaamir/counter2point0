@@ -17,11 +17,11 @@ class EditableCounter extends StatefulWidget {
 
 class _EditableCounterState extends State<EditableCounter> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-
+  final TextEditingController counterController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    final TextEditingController counterController =
-        widget.counter.counterController;
+    counterController.text = '${widget.counter.counter}';
+
     return Column(
       children: [
         Form(
@@ -63,8 +63,6 @@ class _EditableCounterState extends State<EditableCounter> {
                         Counter(
                           counter: int.parse(counterController.text),
                           editing: false,
-                          counterController: TextEditingController(
-                              text: counterController.text),
                         ),
                       );
                     }
@@ -79,6 +77,6 @@ class _EditableCounterState extends State<EditableCounter> {
   @override
   void dispose() {
     super.dispose();
-    widget.counter.counterController.dispose();
+    counterController.dispose();
   }
 }

@@ -24,4 +24,15 @@ class CounterController {
 
     return color;
   }
+
+  isValueValid(var value) {
+    if (value == null || !RegExp(r'^-?\d+$').hasMatch(value)) {
+      return "Value must be an integer";
+    } else if (int.parse(value) > kMaxValue) {
+      return "Value must be less than $kMaxValue";
+    } else if (int.parse(value) < kMinValue) {
+      return "Value must be greater than $kMinValue";
+    }
+    return null;
+  }
 }

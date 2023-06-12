@@ -1,78 +1,44 @@
 part of 'view.dart';
 
-class EditableCounter extends StatefulWidget {
-  const EditableCounter({
+class EditableCounter extends StatelessWidget {
+  EditableCounter({
     super.key,
     required this.setCounter,
     required this.setEditing,
     required this.counter,
   });
+
+  final Counter counter;
   final Function(Counter) setCounter;
   final Function(bool) setEditing;
-  final Counter counter;
 
-  @override
-  State<EditableCounter> createState() => _EditableCounterState();
-}
+  final ThemeController themeController = ThemeController();
 
-class _EditableCounterState extends State<EditableCounter> {
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  final TextEditingController counterController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    counterController.text = '${widget.counter.counter}';
-
-    return Column(
-      children: [
-        Form(
-          key: _formKey,
-          child: TextFieldCustom(
-            controller: counterController,
-            initialVal: '${widget.counter.counter}',
-            validate: (value) {
-              if (value == null || !RegExp(r'^-?\d+$').hasMatch(value)) {
-                return "Value must be an integer";
-              } else if (int.parse(value) > widget.counter.max) {
-                return "Value must be less than ${widget.counter.max}";
-              } else if (int.parse(value) < widget.counter.min) {
-                return "Value must be greater than ${widget.counter.min}";
-              }
-              return null;
-            },
-          ),
-        ),
-        //buttons
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 10),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Btn(
-                title: 'Cancel',
-                onPressed: () => widget.setEditing(false),
-              ),
-              const SizedBox(width: 30),
-              Btn(
-                  title: 'Done',
-                  highlight: true,
-                  onPressed: () {
-                    final FormState form = _formKey.currentState as FormState;
-                    if (form.validate()) {
-                      // widget.setEditing(false);
-                      widget.setCounter(widget.counter.setCounterAndExitEdit(
-                          int.parse(counterController.text)));
-                    }
-                  }),
-            ],
-          ),
-        ),
-      ],
+    return GestureDetector(
+      key: const Key('normal counter'),
+      child: ListenableBuilder(
+        listenable: themeController,
+        builder: (BuildContext context, Widget? child) {
+          return AnimatedDefaultTextStyle(
+            duration: const Duration(milliseconds: 400),
+            style: TextStyle(
+              fontSize: counter.fontSize,
+              color: themeController.isDarkMode
+                  ? Color.fromARGB(
+                      255, 255, 255 - counter.color, 255 - counter.color)
+                  : Color.fromARGB(255, counter.color, 0, 0),
+            ),
+            child: Text(
+              '${counter.counter}',
+            ),
+          );
+        },
+      ),
+      onTap: () {
+        setCounter(counter.toggleEditing());
+      },
     );
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    counterController.dispose();
   }
 }

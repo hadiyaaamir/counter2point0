@@ -5,23 +5,12 @@ class Counter {
   final int counter;
   final bool editing;
 
-  final int min;
-  final int max;
-
-  // final double fontSize;
-  final double maxFont;
-  final double minFont;
-
   final double fontSize;
   final int color;
 
   const Counter({
     required this.counter,
     required this.editing,
-    required this.min,
-    required this.max,
-    required this.maxFont,
-    required this.minFont,
     this.fontSize = 10,
     this.color = 0,
   });
@@ -29,20 +18,12 @@ class Counter {
   Counter copyWith({
     int? counter,
     bool? editing,
-    int? min,
-    int? max,
-    double? maxFont,
-    double? minFont,
     double? fontSize,
     int? color,
   }) {
     return Counter(
       counter: counter ?? this.counter,
       editing: editing ?? this.editing,
-      min: min ?? this.min,
-      max: max ?? this.max,
-      maxFont: maxFont ?? this.maxFont,
-      minFont: minFont ?? this.minFont,
       fontSize: fontSize ?? this.fontSize,
       color: color ?? this.color,
     );
@@ -55,7 +36,7 @@ class Counter {
       );
 
   Counter increment() {
-    if (counter < max) {
+    if (counter < kMaxValue) {
       return copyWith(
         counter: counter + 1,
         fontSize: CounterController().getFontSize(counter + 1),
@@ -66,7 +47,7 @@ class Counter {
   }
 
   Counter decrement() {
-    if (counter > min) {
+    if (counter > kMinValue) {
       return copyWith(
         counter: counter - 1,
         fontSize: CounterController().getFontSize(counter - 1),
@@ -77,7 +58,7 @@ class Counter {
   }
 
   Counter reset() {
-    int resetVal = min <= 0 ? 0 : min;
+    int resetVal = kMinValue <= 0 ? 0 : kMinValue;
     return copyWith(
       counter: resetVal,
       fontSize: CounterController().getFontSize(resetVal),
@@ -97,4 +78,7 @@ class Counter {
 
   Counter setFontSize(double font) => copyWith(fontSize: font);
   Counter setColor(int color) => copyWith(color: color);
+
+  bool isMaxValue() => counter == kMaxValue;
+  bool isMinValue() => counter == kMinValue;
 }

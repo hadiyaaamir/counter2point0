@@ -11,10 +11,6 @@ class _CounterMainState extends State<CounterMain> {
   Counter _counter = const Counter(
     counter: 0,
     editing: false,
-    min: kMinValue,
-    max: kMaxValue,
-    maxFont: kMaxFont,
-    minFont: kMinFont,
   );
 
   @override
@@ -30,16 +26,8 @@ class _CounterMainState extends State<CounterMain> {
     setState(() {
       _counter = c;
     });
-    if (_counter.counter == _counter.max || _counter.counter == _counter.min) {
-      final snackBar = SnackBar(
-        content: Text('You have reached the'
-            '${_counter.counter == _counter.max ? ' maximum ' : ' minimum '}'
-            'value'),
-        action: SnackBarAction(
-          label: 'Okay',
-          onPressed: () {},
-        ),
-      );
+    if (_counter.isMaxValue() || _counter.isMinValue()) {
+      final snackBar = getSnackbar(_counter.isMaxValue());
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
     }
   }
@@ -61,66 +49,15 @@ class _CounterMainState extends State<CounterMain> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              //top text
               Text(
                 'This is the current counter value:',
                 style: Theme.of(context).textTheme.bodyLarge,
               ),
-
-              //number
-              Padding(
-                padding: EdgeInsets.symmetric(
-                    horizontal: 30, vertical: _counter.editing ? 5 : 10),
-                child: AnimatedSwitcher(
-                  duration: const Duration(milliseconds: 400),
-                  transitionBuilder:
-                      (Widget child, Animation<double> animation) {
-                    return FadeTransition(
-                      opacity: animation,
-                      child: ScaleTransition(
-                        scale: animation,
-                        child: child,
-                      ),
-                    );
-                  },
-                  child: _counter.editing
-                      ? EditableCounter(
-                          key: const Key('editable counter'),
-                          counter: _counter,
-                          setCounter: setCounter,
-                          setEditing: (bool edit) => setState(
-                              () => _counter = _counter.setEditing(edit)),
-                        )
-
-                      //clickable number
-                      : GestureDetector(
-                          key: const Key('normal counter'),
-                          child: ListenableBuilder(
-                            listenable: themeController,
-                            builder: (BuildContext context, Widget? child) {
-                              return AnimatedDefaultTextStyle(
-                                duration: const Duration(milliseconds: 400),
-                                style: TextStyle(
-                                  fontSize: _counter.fontSize,
-                                  color: themeController.isDarkMode
-                                      ? Color.fromARGB(
-                                          255,
-                                          255,
-                                          255 - _counter.color,
-                                          255 - _counter.color)
-                                      : Color.fromARGB(
-                                          255, _counter.color, 0, 0),
-                                ),
-                                child: Text(
-                                  '${_counter.counter}',
-                                ),
-                              );
-                            },
-                          ),
-                          onTap: () {
-                            setState(() => _counter = _counter.toggleEditing());
-                          },
-                        ),
+              CounterNumber(
+                counter: _counter,
+                setCounter: setCounter,
+                setEditing: (bool edit) => setState(
+                  () => _counter = _counter.setEditing(edit),
                 ),
               ),
             ],

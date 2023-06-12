@@ -3,42 +3,44 @@ part of 'view.dart';
 class EditableCounter extends StatelessWidget {
   EditableCounter({
     super.key,
-    required this.setCounter,
-    required this.setEditing,
-    required this.counter,
   });
 
-  final Counter counter;
-  final Function(Counter) setCounter;
-  final Function(bool) setEditing;
-
   final ThemeController themeController = ThemeController();
+  final CounterController counterController = CounterController();
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      key: const Key('normal counter'),
-      child: ListenableBuilder(
-        listenable: themeController,
+    return ListenableBuilder(
+        listenable: counterController,
         builder: (BuildContext context, Widget? child) {
-          return AnimatedDefaultTextStyle(
-            duration: const Duration(milliseconds: 400),
-            style: TextStyle(
-              fontSize: counter.fontSize,
-              color: themeController.isDarkMode
-                  ? Color.fromARGB(
-                      255, 255, 255 - counter.color, 255 - counter.color)
-                  : Color.fromARGB(255, counter.color, 0, 0),
+          return GestureDetector(
+            child: ListenableBuilder(
+              listenable: themeController,
+              builder: (BuildContext context, Widget? child) {
+                return AnimatedDefaultTextStyle(
+                  duration: const Duration(milliseconds: 400),
+                  style: TextStyle(
+                    fontSize: counterController.counter.fontSize,
+                    color: themeController.isDarkMode
+                        ? Color.fromARGB(
+                            255,
+                            255,
+                            255 - counterController.counter.color,
+                            255 - counterController.counter.color)
+                        : Color.fromARGB(
+                            255, counterController.counter.color, 0, 0),
+                  ),
+                  child: Text(
+                    '${counterController.counter.counter}',
+                  ),
+                );
+              },
             ),
-            child: Text(
-              '${counter.counter}',
-            ),
+            onTap: () {
+              counterController.counter =
+                  counterController.counter.toggleEditing();
+            },
           );
-        },
-      ),
-      onTap: () {
-        setCounter(counter.toggleEditing());
-      },
-    );
+        });
   }
 }

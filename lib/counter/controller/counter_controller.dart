@@ -1,6 +1,24 @@
 part of 'controller.dart';
 
-class CounterController {
+class CounterController extends ChangeNotifier {
+  static final CounterController _singleton = CounterController._internal();
+
+  factory CounterController() {
+    return _singleton;
+  }
+
+  CounterController._internal();
+
+  Counter _counter = const Counter(
+    counter: 0,
+    editing: false,
+  );
+  Counter get counter => _counter;
+  set counter(Counter c) {
+    _counter = c;
+    notifyListeners();
+  }
+
   double getFontSize(int n) {
     int numbers = kMaxValue - kMinValue + 1;
     double sizeFactor = (kMaxFont - kMinFont) / numbers;

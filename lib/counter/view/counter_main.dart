@@ -11,19 +11,19 @@ class _CounterMainState extends State<CounterMain> {
   Counter _counter = const Counter(
     counter: 0,
     editing: false,
-    min: -50,
-    max: 50,
-    maxFont: 200,
-    minFont: 10,
+    min: kMinValue,
+    max: kMaxValue,
+    maxFont: kMaxFont,
+    minFont: kMinFont,
   );
 
   @override
   void initState() {
     super.initState();
-    _counter = _counter.setFontSize(
-        CounterController().getFontSize(_counter.counter, _counter));
-    _counter = _counter
-        .setColor(CounterController().getColor(_counter.counter, _counter));
+    _counter =
+        _counter.setFontSize(CounterController().getFontSize(_counter.counter));
+    _counter =
+        _counter.setColor(CounterController().getColor(_counter.counter));
   }
 
   void setCounter(Counter c) {

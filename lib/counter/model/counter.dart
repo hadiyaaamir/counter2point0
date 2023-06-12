@@ -50,16 +50,16 @@ class Counter {
 
   Counter setCounter(int value) => copyWith(
         counter: value,
-        fontSize: CounterController().getFontSize(value, this),
-        color: CounterController().getColor(value, this),
+        fontSize: CounterController().getFontSize(value),
+        color: CounterController().getColor(value),
       );
 
   Counter increment() {
     if (counter < max) {
       return copyWith(
         counter: counter + 1,
-        fontSize: CounterController().getFontSize(counter + 1, this),
-        color: CounterController().getColor(counter + 1, this),
+        fontSize: CounterController().getFontSize(counter + 1),
+        color: CounterController().getColor(counter + 1),
       );
     }
     return this;
@@ -69,8 +69,8 @@ class Counter {
     if (counter > min) {
       return copyWith(
         counter: counter - 1,
-        fontSize: CounterController().getFontSize(counter - 1, this),
-        color: CounterController().getColor(counter - 1, this),
+        fontSize: CounterController().getFontSize(counter - 1),
+        color: CounterController().getColor(counter - 1),
       );
     }
     return this;
@@ -80,16 +80,16 @@ class Counter {
     int resetVal = min <= 0 ? 0 : min;
     return copyWith(
       counter: resetVal,
-      fontSize: CounterController().getFontSize(resetVal, this),
-      color: CounterController().getColor(resetVal, this),
+      fontSize: CounterController().getFontSize(resetVal),
+      color: CounterController().getColor(resetVal),
     );
   }
 
   Counter setCounterAndExitEdit(int value) => copyWith(
         counter: value,
         editing: false,
-        fontSize: CounterController().getFontSize(value, this),
-        color: CounterController().getColor(value, this),
+        fontSize: CounterController().getFontSize(value),
+        color: CounterController().getColor(value),
       );
 
   Counter toggleEditing() => copyWith(editing: !editing);

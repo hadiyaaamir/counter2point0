@@ -1,20 +1,20 @@
 part of 'controller.dart';
 
 class CounterController {
-  double getFontSize(int n, Counter c) {
-    int numbers = c.max - c.min + 1;
-    double sizeFactor = (c.maxFont - c.minFont) / numbers;
+  double getFontSize(int n) {
+    int numbers = kMaxValue - kMinValue + 1;
+    double sizeFactor = (kMaxFont - kMinFont) / numbers;
 
-    int myNumber = (n - c.min + 1);
+    int myNumber = (n - kMinValue + 1);
 
-    double fontSize = myNumber * sizeFactor + c.minFont;
+    double fontSize = myNumber * sizeFactor + kMinFont;
 
     return fontSize;
   }
 
-  int getColor(int n, Counter c) {
-    int midPoint = ((c.max + c.min) / 2).round();
-    double scaleFactor = 255 / (c.max - midPoint);
+  int getColor(int n) {
+    int midPoint = ((kMaxValue + kMinValue) / 2).round();
+    double scaleFactor = 255 / (kMaxValue - midPoint);
     int color = ((n - midPoint).abs() * scaleFactor).round();
 
     // print('number: $n');

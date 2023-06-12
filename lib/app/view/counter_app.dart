@@ -21,7 +21,7 @@ class _CounterAppState extends State<CounterApp> {
           home: AnimatedTheme(
             data: themeController.themeData,
             duration: const Duration(milliseconds: 500),
-            child: const CounterMain(),
+            child: const CounterScreen(),
           ),
         );
       },

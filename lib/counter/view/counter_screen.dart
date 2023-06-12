@@ -1,25 +1,15 @@
 part of 'view.dart';
 
-class CounterMain extends StatefulWidget {
-  const CounterMain({super.key});
+class CounterScreen extends StatefulWidget {
+  const CounterScreen({super.key});
 
   @override
-  State<CounterMain> createState() => _CounterMainState();
+  State<CounterScreen> createState() => _CounterScreenState();
 }
 
-class _CounterMainState extends State<CounterMain> {
+class _CounterScreenState extends State<CounterScreen> {
   final ThemeController themeController = ThemeController();
   final CounterController counterController = CounterController();
-
-  @override
-  void initState() {
-    super.initState();
-
-    counterController.counter = counterController.counter.setFontSize(
-        CounterController().getFontSize(counterController.counter.counter));
-    counterController.counter =
-        counterController.counter.setColor(counterController.counter.counter);
-  }
 
   @override
   void dispose() {
@@ -61,7 +51,7 @@ class _CounterMainState extends State<CounterMain> {
                       'This is the current counter value:',
                       style: Theme.of(context).textTheme.bodyLarge,
                     ),
-                    CounterNumber(),
+                    EditableCounter(),
                   ],
                 ),
               );

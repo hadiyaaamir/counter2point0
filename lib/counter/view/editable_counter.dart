@@ -5,7 +5,6 @@ class EditableCounter extends StatelessWidget {
     super.key,
   });
 
-  final ThemeController themeController = ThemeController();
   final CounterController counterController = CounterController();
 
   @override
@@ -13,33 +12,29 @@ class EditableCounter extends StatelessWidget {
     return ListenableBuilder(
         listenable: counterController,
         builder: (BuildContext context, Widget? child) {
-          return GestureDetector(
-            child: ListenableBuilder(
-              listenable: themeController,
-              builder: (BuildContext context, Widget? child) {
-                return AnimatedDefaultTextStyle(
-                  duration: const Duration(milliseconds: 400),
-                  style: TextStyle(
-                    fontSize: counterController.counter.fontSize,
-                    color: themeController.isDarkMode
-                        ? Color.fromARGB(
-                            255,
-                            255,
-                            255 - counterController.counter.color,
-                            255 - counterController.counter.color)
-                        : Color.fromARGB(
-                            255, counterController.counter.color, 0, 0),
-                  ),
-                  child: Text(
-                    '${counterController.counter.counter}',
+          return Padding(
+            padding: EdgeInsets.symmetric(
+                horizontal: 30,
+                vertical: counterController.counter.editing ? 5 : 10),
+            child: AnimatedSwitcher(
+              duration: const Duration(milliseconds: 400),
+              transitionBuilder: (Widget child, Animation<double> animation) {
+                return FadeTransition(
+                  opacity: animation,
+                  child: ScaleTransition(
+                    scale: animation,
+                    child: child,
                   ),
                 );
               },
+              child: counterController.counter.editing
+                  ? const TextfieldCounter(
+                      key: Key('editable counter'),
+                    )
+                  : RegularCounter(
+                      key: const Key('normal counter'),
+                    ),
             ),
-            onTap: () {
-              counterController.counter =
-                  counterController.counter.toggleEditing();
-            },
           );
         });
   }

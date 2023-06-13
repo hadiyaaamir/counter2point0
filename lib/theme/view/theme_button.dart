@@ -8,8 +8,6 @@ class ThemeButton extends StatefulWidget {
 }
 
 class _ThemeButtonState extends State<ThemeButton> {
-  // ThemeController();
-
   @override
   Widget build(BuildContext context) {
     final ThemeController themeController =
@@ -19,12 +17,7 @@ class _ThemeButtonState extends State<ThemeButton> {
       onPressed: () {
         themeController.toggleMode();
       },
-      icon:
-          // ListenableBuilder(
-          //     listenable: themeController,
-          //     builder: (BuildContext context, Widget? child) {
-          // return
-          AnimatedSwitcher(
+      icon: AnimatedSwitcher(
         duration: const Duration(milliseconds: 500),
         transitionBuilder: (Widget child, Animation<double> animation) {
           return FadeTransition(
@@ -35,11 +28,9 @@ class _ThemeButtonState extends State<ThemeButton> {
             ),
           );
         },
-        child: themeController.isDarkMode
+        child: themeController.theme.isDarkMode
             ? const Icon(key: Key('1'), Icons.light_mode)
             : const Icon(key: Key('2'), Icons.dark_mode),
-        //   );
-        // }
       ),
     );
   }

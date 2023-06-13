@@ -17,12 +17,7 @@ class _TextfieldCounterState extends State<TextfieldCounter> {
   Widget build(BuildContext context) {
     final CounterController counterController =
         CounterInherited.of(context).listenable;
-    return
-        // ListenableBuilder(
-        //     listenable: counterController,
-        //     builder: (BuildContext context, Widget? child) {
-        //       return
-        Column(
+    return Column(
       children: [
         Form(
           key: _formKey,
@@ -61,7 +56,6 @@ class _TextfieldCounterState extends State<TextfieldCounter> {
         ),
       ],
     );
-    // });
   }
 
   @override

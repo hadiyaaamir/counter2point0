@@ -12,7 +12,6 @@ class _CounterAppState extends State<CounterApp> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
     themeController.dispose();
   }
@@ -23,7 +22,7 @@ class _CounterAppState extends State<CounterApp> {
 
     themeController.addListener(() {
       print('add listener called');
-      print("dark mode? ${themeController.isDarkMode}");
+      print("dark mode? ${themeController.theme.isDarkMode}");
       setState(() {});
     });
   }
@@ -34,9 +33,9 @@ class _CounterAppState extends State<CounterApp> {
       listenable: themeController,
       child: MaterialApp(
         title: 'Counter 2.0',
-        themeMode: themeController.themeMode,
+        themeMode: themeController.theme.themeMode,
         home: AnimatedTheme(
-          data: themeController.themeData,
+          data: themeController.theme.themeData,
           duration: const Duration(milliseconds: 500),
           child: const CounterScreen(),
         ),

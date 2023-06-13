@@ -9,9 +9,7 @@ class ButtonsRow extends StatelessWidget {
   Widget build(BuildContext context) {
     final CounterController counterController =
         CounterInherited.of(context).listenable;
-    // return ListenableBuilder(
-    //     listenable: counterController,
-    //     builder: (BuildContext context, Widget? child) {
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
@@ -45,6 +43,5 @@ class ButtonsRow extends StatelessWidget {
         ],
       ],
     );
-    // });
   }
 }

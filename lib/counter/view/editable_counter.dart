@@ -9,9 +9,7 @@ class EditableCounter extends StatelessWidget {
   Widget build(BuildContext context) {
     final CounterController counterController =
         CounterInherited.of(context).listenable;
-    // return ListenableBuilder(
-    //     listenable: counterController,
-    //     builder: (BuildContext context, Widget? child) {
+
     return Padding(
       padding: EdgeInsets.symmetric(
           horizontal: 30, vertical: counterController.counter.editing ? 5 : 10),
@@ -27,14 +25,13 @@ class EditableCounter extends StatelessWidget {
           );
         },
         child: counterController.counter.editing
-            ? TextfieldCounter(
+            ? const TextfieldCounter(
                 key: Key('editable counter'),
               )
-            : RegularCounter(
-                key: const Key('normal counter'),
+            : const RegularCounter(
+                key: Key('normal counter'),
               ),
       ),
     );
-    // });
   }
 }

@@ -8,19 +8,16 @@ class CounterScreen extends StatefulWidget {
 }
 
 class _CounterScreenState extends State<CounterScreen> {
-  // final ThemeController themeController = ThemeController();
   final CounterController counterController = CounterController();
 
   @override
   void dispose() {
     super.dispose();
-    // themeController.dispose();
     counterController.dispose();
   }
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     counterController.addListener(() {
       setState(() {});
@@ -51,8 +48,6 @@ class _CounterScreenState extends State<CounterScreen> {
         body: ListenableBuilder(
             listenable: counterController,
             builder: (BuildContext context, Widget? child) {
-              // final CounterController counterController =
-              //     CounterInherited.of(context).listenable;
               checkSnackbar(counterController.counter);
               return Center(
                 child: Column(
@@ -68,7 +63,7 @@ class _CounterScreenState extends State<CounterScreen> {
               );
             }),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-        floatingActionButton: ButtonsRow(),
+        floatingActionButton: const ButtonsRow(),
       ),
     );
   }

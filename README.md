@@ -1,4 +1,4 @@
-# counter2point0
+# Counter 2.0
 
 This is an updated version of the default Flutter Counter app. It includes several new features and enhancements, making it more interactive and visually appealing.
 
@@ -17,3 +17,5 @@ This project follows clean coding practices and has been structured in a modular
 - Barrel Files: Barrel files have been utilized to simplify imports and provide easy access to multiple files within each feature folder.
 - Reduced Primitive Obsession: Classes have been used to encapsulate related data and behavior, reducing reliance on primitive types and improving code organization.
 - Immutability: Immutable classes have been implemented to ensure data integrity and minimize unexpected changes.
+
+[untitled.webm](https://github.com/hadiyaaamir/counter2point0/assets/63019067/993ff878-8da4-489c-99db-c96493d885b6)

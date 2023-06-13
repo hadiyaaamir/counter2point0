@@ -1,14 +1,6 @@
 part of 'controller.dart';
 
 class ThemeController extends ChangeNotifier {
-  static final ThemeController _singleton = ThemeController._internal();
-
-  factory ThemeController() {
-    return _singleton;
-  }
-
-  ThemeController._internal();
-
   ThemeMode _themeMode = ThemeMode.system;
   ThemeMode get themeMode => _themeMode;
 
@@ -25,7 +17,7 @@ class ThemeController extends ChangeNotifier {
 
   toggleMode() {
     isDarkMode ? _themeMode = ThemeMode.light : _themeMode = ThemeMode.dark;
-
+    print('mode toggle to $_themeMode');
     notifyListeners();
   }
 }

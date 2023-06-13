@@ -8,14 +8,23 @@ class CounterScreen extends StatefulWidget {
 }
 
 class _CounterScreenState extends State<CounterScreen> {
-  final ThemeController themeController = ThemeController();
+  // final ThemeController themeController = ThemeController();
   final CounterController counterController = CounterController();
 
   @override
   void dispose() {
     super.dispose();
-    themeController.dispose();
+    // themeController.dispose();
     counterController.dispose();
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    counterController.addListener(() {
+      setState(() {});
+    });
   }
 
   void checkSnackbar(Counter c) {
@@ -30,18 +39,20 @@ class _CounterScreenState extends State<CounterScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return CounterInherited(
+      listenable: counterController,
+      child: Scaffold(
         appBar: AppBar(
           backgroundColor: Theme.of(context).colorScheme.inversePrimary,
           title: const Text('Counter 2.0'),
           centerTitle: true,
-          actions: const [
-            ThemeButton(),
-          ],
+          actions: const [ThemeButton()],
         ),
         body: ListenableBuilder(
             listenable: counterController,
             builder: (BuildContext context, Widget? child) {
+              // final CounterController counterController =
+              //     CounterInherited.of(context).listenable;
               checkSnackbar(counterController.counter);
               return Center(
                 child: Column(
@@ -51,12 +62,14 @@ class _CounterScreenState extends State<CounterScreen> {
                       'This is the current counter value:',
                       style: Theme.of(context).textTheme.bodyLarge,
                     ),
-                    EditableCounter(),
+                    const EditableCounter(),
                   ],
                 ),
               );
             }),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-        floatingActionButton: ButtonsRow());
+        floatingActionButton: ButtonsRow(),
+      ),
+    );
   }
 }

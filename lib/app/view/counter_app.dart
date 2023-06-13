@@ -11,20 +11,36 @@ class _CounterAppState extends State<CounterApp> {
   final ThemeController themeController = ThemeController();
 
   @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    themeController.dispose();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    themeController.addListener(() {
+      print('add listener called');
+      print("dark mode? ${themeController.isDarkMode}");
+      setState(() {});
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return ListenableBuilder(
+    return ThemeInherited(
       listenable: themeController,
-      builder: (BuildContext context, Widget? child) {
-        return MaterialApp(
-          title: 'Counter 2.0',
-          themeMode: themeController.themeMode,
-          home: AnimatedTheme(
-            data: themeController.themeData,
-            duration: const Duration(milliseconds: 500),
-            child: const CounterScreen(),
-          ),
-        );
-      },
+      child: MaterialApp(
+        title: 'Counter 2.0',
+        themeMode: themeController.themeMode,
+        home: AnimatedTheme(
+          data: themeController.themeData,
+          duration: const Duration(milliseconds: 500),
+          child: const CounterScreen(),
+        ),
+      ),
     );
   }
 }

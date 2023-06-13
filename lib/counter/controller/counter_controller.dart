@@ -1,14 +1,6 @@
 part of 'controller.dart';
 
 class CounterController extends ChangeNotifier {
-  static final CounterController _singleton = CounterController._internal();
-
-  factory CounterController() {
-    return _singleton;
-  }
-
-  CounterController._internal();
-
   Counter _counter = const Counter(
     counter: 0,
     editing: false,

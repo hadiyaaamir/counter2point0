@@ -9,7 +9,6 @@ class ThemeController extends ChangeNotifier {
 
   toggleMode() {
     _theme = _theme.toggleTheme();
-    print('mode toggle to $_theme._themeMode');
     notifyListeners();
   }
 }

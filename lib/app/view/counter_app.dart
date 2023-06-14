@@ -9,6 +9,7 @@ class CounterApp extends StatefulWidget {
 
 class _CounterAppState extends State<CounterApp> {
   final ThemeController themeController = ThemeController();
+  bool changed = false;
 
   @override
   void dispose() {
@@ -21,9 +22,9 @@ class _CounterAppState extends State<CounterApp> {
     super.initState();
 
     themeController.addListener(() {
-      print('add listener called');
-      print("dark mode? ${themeController.theme.isDarkMode}");
-      setState(() {});
+      setState(() {
+        changed = !changed;
+      });
     });
   }
 
@@ -31,6 +32,7 @@ class _CounterAppState extends State<CounterApp> {
   Widget build(BuildContext context) {
     return ThemeInherited(
       listenable: themeController,
+      changed: changed,
       child: MaterialApp(
         title: 'Counter 2.0',
         themeMode: themeController.theme.themeMode,

@@ -2,11 +2,13 @@ part of 'model.dart';
 
 class CounterInherited extends InheritedWidget {
   final CounterController listenable;
+  final bool changed;
 
   const CounterInherited({
     super.key,
     required this.listenable,
     required Widget child,
+    required this.changed,
   }) : super(child: child);
 
   static CounterInherited of(BuildContext context) {
@@ -18,10 +20,7 @@ class CounterInherited extends InheritedWidget {
 
   @override
   bool updateShouldNotify(CounterInherited oldWidget) {
-    print('counter old: ${oldWidget.listenable.counter.counter}');
-    print('counter new: ${listenable.counter.counter}');
-
-    return true;
-    // return listenable.counter != oldWidget.listenable.counter;
+    print('counter should update? ${changed != oldWidget.changed}');
+    return changed != oldWidget.changed;
   }
 }

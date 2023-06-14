@@ -9,7 +9,7 @@ class CounterScreen extends StatefulWidget {
 
 class _CounterScreenState extends State<CounterScreen> {
   final CounterController counterController = CounterController();
-
+  bool changed = false;
   @override
   void dispose() {
     super.dispose();
@@ -20,7 +20,9 @@ class _CounterScreenState extends State<CounterScreen> {
   void initState() {
     super.initState();
     counterController.addListener(() {
-      setState(() {});
+      setState(() {
+        changed = !changed;
+      });
     });
   }
 
@@ -38,6 +40,7 @@ class _CounterScreenState extends State<CounterScreen> {
   Widget build(BuildContext context) {
     return CounterInherited(
       listenable: counterController,
+      changed: changed,
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: Theme.of(context).colorScheme.inversePrimary,

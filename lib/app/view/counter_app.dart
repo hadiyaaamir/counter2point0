@@ -8,7 +8,7 @@ class CounterApp extends StatefulWidget {
 }
 
 class _CounterAppState extends State<CounterApp> {
-  final ThemeController themeController = ThemeController();
+  final ThemeController themeController = ThemeController(counterValue: 0);
   bool changed = false;
 
   @override

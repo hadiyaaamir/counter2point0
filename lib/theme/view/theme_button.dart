@@ -12,10 +12,12 @@ class _ThemeButtonState extends State<ThemeButton> {
   Widget build(BuildContext context) {
     final ThemeController themeController =
         ThemeInherited.of(context).listenable;
+    final CounterController counterController =
+        CounterInherited.of(context).listenable;
 
     return IconButton(
       onPressed: () {
-        themeController.toggleMode();
+        themeController.toggleMode(counterController.counter.counter);
       },
       icon: AnimatedSwitcher(
         duration: const Duration(milliseconds: 500),

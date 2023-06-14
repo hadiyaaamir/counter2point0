@@ -16,8 +16,7 @@ class RegularCounter extends StatelessWidget {
     return GestureDetector(
       child: AnimatedDefaultTextStyle(
         duration: const Duration(milliseconds: 400),
-        style: themeController.theme
-            .getTextStyle(counterController.counter.counter),
+        style: themeController.theme.counterTheme.counterTextStyle,
         child: Text(
           '${counterController.counter.counter}',
         ),

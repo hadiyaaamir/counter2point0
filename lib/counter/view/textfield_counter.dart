@@ -17,6 +17,8 @@ class _TextfieldCounterState extends State<TextfieldCounter> {
   Widget build(BuildContext context) {
     final CounterController counterController =
         CounterInherited.of(context).listenable;
+    final ThemeController themeController =
+        ThemeInherited.of(context).listenable;
     return Column(
       children: [
         Form(
@@ -49,6 +51,8 @@ class _TextfieldCounterState extends State<TextfieldCounter> {
                       counterController.counter = counterController.counter
                           .setCounterAndExitEdit(
                               int.parse(textController.text));
+                      themeController.updateCounterTextStyle(
+                          counterController.counter.counter);
                     }
                   }),
             ],

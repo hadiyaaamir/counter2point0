@@ -4,3 +4,4 @@ import 'package:flutter/material.dart';
 
 part 'theme_inherited.dart';
 part 'app_theme.dart';
+part 'counter_theme.dart';

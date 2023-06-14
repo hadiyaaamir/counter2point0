@@ -21,6 +21,8 @@ class ThemeInherited extends InheritedWidget {
   @override
   bool updateShouldNotify(ThemeInherited oldWidget) {
     print('theme should update? ${changed != oldWidget.changed}');
+    print('dark mode old: ${oldWidget.listenable.theme.isDarkMode}');
+    print('dark mode: ${listenable.theme.isDarkMode}');
     return changed != oldWidget.changed;
   }
 }

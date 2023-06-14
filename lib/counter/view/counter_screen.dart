@@ -19,6 +19,7 @@ class _CounterScreenState extends State<CounterScreen> {
   @override
   void initState() {
     super.initState();
+
     counterController.addListener(() {
       setState(() {
         changed = !changed;

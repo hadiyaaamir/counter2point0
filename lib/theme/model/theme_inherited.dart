@@ -2,12 +2,10 @@ part of 'model.dart';
 
 class ThemeInherited extends InheritedWidget {
   final ThemeController listenable;
-  final bool changed;
 
   const ThemeInherited({
     super.key,
     required this.listenable,
-    required this.changed,
     required Widget child,
   }) : super(child: child);
 
@@ -20,9 +18,6 @@ class ThemeInherited extends InheritedWidget {
 
   @override
   bool updateShouldNotify(ThemeInherited oldWidget) {
-    print('theme should update? ${changed != oldWidget.changed}');
-    print('dark mode old: ${oldWidget.listenable.theme.isDarkMode}');
-    print('dark mode: ${listenable.theme.isDarkMode}');
-    return changed != oldWidget.changed;
+    return listenable.stateChanged;
   }
 }

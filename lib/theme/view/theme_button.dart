@@ -18,6 +18,7 @@ class _ThemeButtonState extends State<ThemeButton> {
     return IconButton(
       onPressed: () {
         themeController.toggleMode(counterController.counter.counter);
+        counterController.counter = counterController.counter;
       },
       icon: AnimatedSwitcher(
         duration: const Duration(milliseconds: 500),

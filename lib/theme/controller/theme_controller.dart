@@ -13,13 +13,20 @@ class ThemeController extends ChangeNotifier {
   );
   AppTheme get theme => _theme;
 
+  AppTheme _oldTheme = const AppTheme(
+    themeMode: ThemeMode.system,
+    counterTheme: CounterTheme(counterTextStyle: TextStyle()),
+  );
+
+  bool get stateChanged => _theme != _oldTheme;
+
   toggleMode(int counterValue) {
+    _oldTheme = _theme;
     _theme = (_theme.toggleTheme()).setTextStyle(counterValue);
     notifyListeners();
   }
 
   updateCounterTextStyle(int counterValue) {
-    print('update counter text style called');
     _theme = _theme.setTextStyle(counterValue);
     notifyListeners();
   }

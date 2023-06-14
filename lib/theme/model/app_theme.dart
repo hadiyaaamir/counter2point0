@@ -24,7 +24,7 @@ class AppTheme {
   ThemeData get themeData => isDarkMode
       ? ThemeData.dark(useMaterial3: true)
       : ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+          colorScheme: ColorScheme.fromSeed(seedColor: kSeedColor),
           useMaterial3: true,
         );
 

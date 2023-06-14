@@ -6,4 +6,4 @@ const kMinValue = -50;
 const double kMaxFont = 200;
 const double kMinFont = 10;
 
-const Color kSeedColor = Colors.deepPurple;
+const Color seedColor = Colors.deepPurple;

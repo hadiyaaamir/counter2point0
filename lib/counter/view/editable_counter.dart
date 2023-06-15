@@ -8,7 +8,7 @@ class EditableCounter extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final CounterController counterController =
-        CounterInherited.of(context).listenable;
+        MyInheritedWidget.of<CounterController>(context).listenable;
 
     return ListenableBuilder(
       listenable: counterController,

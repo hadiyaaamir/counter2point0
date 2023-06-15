@@ -16,24 +16,32 @@ class _CounterAppState extends State<CounterApp> {
     themeController.dispose();
   }
 
+  Widget myApp() {
+    return MaterialApp(
+      title: 'Counter 2.0',
+      themeMode: themeController.themeMode,
+      home: AnimatedTheme(
+        data: themeController.theme.themeData,
+        duration: const Duration(milliseconds: 500),
+        child: const CounterScreen(),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    return ListenableBuilder(
-      listenable: themeController,
-      builder: (BuildContext context, Widget? child) {
-        return ThemeInherited(
-          listenable: themeController,
-          child: MaterialApp(
-            title: 'Counter 2.0',
-            themeMode: themeController.themeMode,
-            home: AnimatedTheme(
-              data: themeController.theme.themeData,
-              duration: const Duration(milliseconds: 500),
-              child: const CounterScreen(),
-            ),
-          ),
-        );
-      },
+    return ListenableInherited<ThemeController>(
+      controller: themeController,
+      child: MaterialApp(
+        title: 'Counter 2.0',
+        themeMode: themeController.themeMode,
+        home: AnimatedTheme(
+          data: themeController.theme.themeData,
+          duration: const Duration(milliseconds: 500),
+          child: const CounterScreen(),
+        ),
+      ),
+      update: () => setState(() {}),
     );
   }
 }

@@ -11,9 +11,7 @@ class _ThemeButtonState extends State<ThemeButton> {
   @override
   Widget build(BuildContext context) {
     final ThemeController themeController =
-        ThemeInherited.of(context).listenable;
-    // final CounterController counterController =
-    //     CounterInherited.of(context).listenable;
+        MyInheritedWidget.of<ThemeController>(context).listenable;
 
     return ListenableBuilder(
       listenable: themeController,

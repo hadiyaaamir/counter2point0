@@ -16,15 +16,6 @@ class _CounterScreenState extends State<CounterScreen> {
     counterController.dispose();
   }
 
-  @override
-  void initState() {
-    super.initState();
-
-    counterController.addListener(() {
-      setState(() {});
-    });
-  }
-
   void checkSnackbar(Counter c) {
     if (c.isMaxValue() || c.isMinValue()) {
       final snackBar = getSnackbar(c.isMaxValue());
@@ -40,8 +31,8 @@ class _CounterScreenState extends State<CounterScreen> {
   @override
   Widget build(BuildContext context) {
     checkSnackbar(counterController.counter);
-    return CounterInherited(
-      listenable: counterController,
+    return ListenableInherited<CounterController>(
+      controller: counterController,
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: Theme.of(context).colorScheme.inversePrimary,
@@ -64,6 +55,7 @@ class _CounterScreenState extends State<CounterScreen> {
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
         floatingActionButton: const ButtonsRow(),
       ),
+      update: () => setState(() {}),
     );
   }
 }

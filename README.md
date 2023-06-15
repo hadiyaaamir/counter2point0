@@ -11,10 +11,12 @@ This is an updated version of the default Flutter Counter app. It includes sever
 
 ## Technical Implementations
 
-- Custom State Management: Implemented using change notifiers and inherited widgets for efficient state updates and synchronized UI.
-- Inherited Widgets: Utilized for data and state propagation, reducing code duplication and improving performance.
+- Custom State Management: Custom State Management: Implemented using ChangeNotifier and listeners for efficient state updates and synchronized UI.
+- Inherited Widgets: Utilized for dependency injection, enabling efficient data and state propagation without tight coupling.
 - Immutability: Ensured data integrity and predictability by implementing immutable classes.
 - Reduced Primitive Obsession: Encapsulated related data and behavior within custom classes, improving code organization and reducing reliance on primitive types.
+- Factories: Enables flexible object creation with different implementations under a common interface.
+- Abstract Classes: Defines common behavior and ensures consistency across related classes.
 
 ## Project Structure
 

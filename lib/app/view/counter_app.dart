@@ -25,7 +25,7 @@ class _CounterAppState extends State<CounterApp> {
           listenable: themeController,
           child: MaterialApp(
             title: 'Counter 2.0',
-            themeMode: themeController.theme.themeMode,
+            themeMode: themeController.themeMode,
             home: AnimatedTheme(
               data: themeController.theme.themeData,
               duration: const Duration(milliseconds: 500),

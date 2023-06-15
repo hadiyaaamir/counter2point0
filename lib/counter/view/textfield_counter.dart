@@ -59,8 +59,6 @@ class _TextfieldCounterState extends State<TextfieldCounter> {
                                   .counter
                                   .setCounterAndExitEdit(
                                       int.parse(textController.text));
-                              themeController.updateCounterTextStyle(
-                                  counterController.counter.counter);
                             }
                           });
                     },

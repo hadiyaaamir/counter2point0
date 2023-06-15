@@ -12,15 +12,15 @@ class _ThemeButtonState extends State<ThemeButton> {
   Widget build(BuildContext context) {
     final ThemeController themeController =
         ThemeInherited.of(context).listenable;
-    final CounterController counterController =
-        CounterInherited.of(context).listenable;
+    // final CounterController counterController =
+    //     CounterInherited.of(context).listenable;
 
     return ListenableBuilder(
       listenable: themeController,
       builder: (BuildContext context, Widget? child) {
         return IconButton(
           onPressed: () {
-            themeController.toggleMode(counterController.counter.counter);
+            themeController.toggleMode();
           },
           icon: AnimatedSwitcher(
             duration: const Duration(milliseconds: 500),
@@ -33,7 +33,7 @@ class _ThemeButtonState extends State<ThemeButton> {
                 ),
               );
             },
-            child: themeController.theme.isDarkMode
+            child: themeController.isDarkMode
                 ? const Icon(key: Key('light mode'), Icons.light_mode)
                 : const Icon(key: Key('dark mode'), Icons.dark_mode),
           ),

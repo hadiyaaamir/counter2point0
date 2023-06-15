@@ -2,38 +2,40 @@ part of 'model.dart';
 
 @immutable
 class AppTheme {
-  final ThemeMode themeMode;
   final CounterTheme counterTheme;
+  final ThemeData themeData;
 
   const AppTheme({
-    required this.themeMode,
     required this.counterTheme,
+    required this.themeData,
   });
 
-  AppTheme copyWith({
-    ThemeMode? themeMode,
-    CounterTheme? counterTheme,
-  }) {
-    return AppTheme(
-      themeMode: themeMode ?? this.themeMode,
-      counterTheme: counterTheme ?? this.counterTheme,
-    );
-  }
-
-  bool get isDarkMode => themeMode == ThemeMode.dark;
-  ThemeData get themeData => isDarkMode
-      ? ThemeData.dark(useMaterial3: true)
-      : ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: seedColor),
+  factory AppTheme.light() => AppTheme(
+        counterTheme: CounterThemeLight(),
+        themeData: ThemeData(
+          colorScheme: ColorScheme.fromSeed(seedColor: kSeedColor),
           useMaterial3: true,
-        );
-
-  AppTheme toggleTheme() =>
-      copyWith(themeMode: isDarkMode ? ThemeMode.light : ThemeMode.dark);
-
-  AppTheme setTextStyle(int counterValue) => copyWith(
-        counterTheme: isDarkMode
-            ? CounterTheme.dark(counterValue)
-            : CounterTheme.light(counterValue),
+        ),
       );
+
+  factory AppTheme.dark() => AppTheme(
+        counterTheme: CounterThemeDark(),
+        themeData: ThemeData.dark(useMaterial3: true),
+      );
+
+  // ThemeData get themeData => isDarkMode
+  //     ? ThemeData.dark(useMaterial3: true)
+  //     : ThemeData(
+  //         colorScheme: ColorScheme.fromSeed(seedColor: seedColor),
+  //         useMaterial3: true,
+  //       );
+
+  // AppTheme toggleTheme() =>
+  //     copyWith(themeMode: isDarkMode ? ThemeMode.light : ThemeMode.dark);
+
+  // AppTheme setTextStyle(int counterValue) => copyWith(
+  //       counterTheme: isDarkMode
+  //           ? CounterTheme.dark(counterValue)
+  //           : CounterTheme.light(counterValue),
+  //     );
 }

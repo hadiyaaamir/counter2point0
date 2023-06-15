@@ -1,23 +1,22 @@
 part of 'controller.dart';
 
 class ThemeController extends ChangeNotifier {
-  ThemeController() {
-    _theme = _theme.setTextStyle(0);
-  }
+  AppTheme get theme => isDarkMode ? AppTheme.dark() : AppTheme.light();
 
-  AppTheme _theme = const AppTheme(
-    themeMode: ThemeMode.system,
-    counterTheme: CounterTheme(counterTextStyle: TextStyle()),
-  );
-  AppTheme get theme => _theme;
+  ThemeMode _themeMode = ThemeMode.system;
+  ThemeMode get themeMode => _themeMode;
 
-  toggleMode(int counterValue) {
-    _theme = (_theme.toggleTheme()).setTextStyle(counterValue);
+  bool get isDarkMode => _themeMode == ThemeMode.dark;
+
+  toggleMode() {
+    isDarkMode ? _themeMode = ThemeMode.light : _themeMode = ThemeMode.dark;
     notifyListeners();
   }
 
-  updateCounterTextStyle(int counterValue) {
-    _theme = _theme.setTextStyle(counterValue);
-    notifyListeners();
+  TextStyle getCounterTextStyle(int value) {
+    return TextStyle(
+      color: theme.counterTheme.counterColor(value),
+      fontSize: theme.counterTheme.counterFont(value),
+    );
   }
 }

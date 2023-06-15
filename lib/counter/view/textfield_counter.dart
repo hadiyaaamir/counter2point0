@@ -19,46 +19,58 @@ class _TextfieldCounterState extends State<TextfieldCounter> {
         CounterInherited.of(context).listenable;
     final ThemeController themeController =
         ThemeInherited.of(context).listenable;
-    return Column(
-      children: [
-        Form(
-          key: _formKey,
-          child: TextFieldCustom(
-            controller: textController,
-            initialVal: '${counterController.counter.counter}',
-            validate: (value) {
-              return counterController.isValueValid(value);
-            },
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 10),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Btn(
-                title: 'Cancel',
-                onPressed: () => counterController.counter =
-                    counterController.counter.setEditing(false),
+    return ListenableBuilder(
+      listenable: counterController,
+      builder: (BuildContext context, Widget? child) {
+        return Column(
+          children: [
+            Form(
+              key: _formKey,
+              child: TextFieldCustom(
+                controller: textController,
+                initialVal: '${counterController.counter.counter}',
+                validate: (value) {
+                  return counterController.isValueValid(value);
+                },
               ),
-              const SizedBox(width: 30),
-              Btn(
-                  title: 'Done',
-                  highlight: true,
-                  onPressed: () {
-                    final FormState form = _formKey.currentState as FormState;
-                    if (form.validate()) {
-                      counterController.counter = counterController.counter
-                          .setCounterAndExitEdit(
-                              int.parse(textController.text));
-                      themeController.updateCounterTextStyle(
-                          counterController.counter.counter);
-                    }
-                  }),
-            ],
-          ),
-        ),
-      ],
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Btn(
+                    title: 'Cancel',
+                    onPressed: () => counterController.counter =
+                        counterController.counter.setEditing(false),
+                  ),
+                  const SizedBox(width: 30),
+                  ListenableBuilder(
+                    listenable: themeController,
+                    builder: (BuildContext context, Widget? child) {
+                      return Btn(
+                          title: 'Done',
+                          highlight: true,
+                          onPressed: () {
+                            final FormState form =
+                                _formKey.currentState as FormState;
+                            if (form.validate()) {
+                              counterController.counter = counterController
+                                  .counter
+                                  .setCounterAndExitEdit(
+                                      int.parse(textController.text));
+                              themeController.updateCounterTextStyle(
+                                  counterController.counter.counter);
+                            }
+                          });
+                    },
+                  ),
+                ],
+              ),
+            ),
+          ],
+        );
+      },
     );
   }
 

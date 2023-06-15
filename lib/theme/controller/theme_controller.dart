@@ -1,11 +1,9 @@
 part of 'controller.dart';
 
 class ThemeController extends ChangeNotifier {
-  ThemeController({required this.counterValue}) {
-    _theme = _theme.setTextStyle(counterValue);
+  ThemeController() {
+    _theme = _theme.setTextStyle(0);
   }
-
-  int counterValue;
 
   AppTheme _theme = const AppTheme(
     themeMode: ThemeMode.system,
@@ -13,15 +11,7 @@ class ThemeController extends ChangeNotifier {
   );
   AppTheme get theme => _theme;
 
-  AppTheme _oldTheme = const AppTheme(
-    themeMode: ThemeMode.system,
-    counterTheme: CounterTheme(counterTextStyle: TextStyle()),
-  );
-
-  bool get stateChanged => _theme != _oldTheme;
-
   toggleMode(int counterValue) {
-    _oldTheme = _theme;
     _theme = (_theme.toggleTheme()).setTextStyle(counterValue);
     notifyListeners();
   }

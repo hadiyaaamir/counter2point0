@@ -7,19 +7,10 @@ class CounterController extends ChangeNotifier {
   );
   Counter get counter => _counter;
 
-  Counter _oldCounter = const Counter(
-    counter: 0,
-    editing: false,
-  );
-  // Counter get oldCounter => _oldCounter;
-
   set counter(Counter c) {
-    _oldCounter = _counter;
     _counter = c;
     notifyListeners();
   }
-
-  bool get stateChanged => _counter != _oldCounter;
 
   isValueValid(var value) {
     if (value == null || !RegExp(r'^-?\d+$').hasMatch(value)) {

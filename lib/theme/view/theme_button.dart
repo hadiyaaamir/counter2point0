@@ -15,26 +15,30 @@ class _ThemeButtonState extends State<ThemeButton> {
     final CounterController counterController =
         CounterInherited.of(context).listenable;
 
-    return IconButton(
-      onPressed: () {
-        themeController.toggleMode(counterController.counter.counter);
-        counterController.counter = counterController.counter;
+    return ListenableBuilder(
+      listenable: themeController,
+      builder: (BuildContext context, Widget? child) {
+        return IconButton(
+          onPressed: () {
+            themeController.toggleMode(counterController.counter.counter);
+          },
+          icon: AnimatedSwitcher(
+            duration: const Duration(milliseconds: 500),
+            transitionBuilder: (Widget child, Animation<double> animation) {
+              return FadeTransition(
+                opacity: animation,
+                child: ScaleTransition(
+                  scale: animation,
+                  child: child,
+                ),
+              );
+            },
+            child: themeController.theme.isDarkMode
+                ? const Icon(key: Key('light mode'), Icons.light_mode)
+                : const Icon(key: Key('dark mode'), Icons.dark_mode),
+          ),
+        );
       },
-      icon: AnimatedSwitcher(
-        duration: const Duration(milliseconds: 500),
-        transitionBuilder: (Widget child, Animation<double> animation) {
-          return FadeTransition(
-            opacity: animation,
-            child: ScaleTransition(
-              scale: animation,
-              child: child,
-            ),
-          );
-        },
-        child: themeController.theme.isDarkMode
-            ? const Icon(key: Key('1'), Icons.light_mode)
-            : const Icon(key: Key('2'), Icons.dark_mode),
-      ),
     );
   }
 }

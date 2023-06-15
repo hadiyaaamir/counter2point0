@@ -18,6 +18,6 @@ class ThemeInherited extends InheritedWidget {
 
   @override
   bool updateShouldNotify(ThemeInherited oldWidget) {
-    return listenable.stateChanged;
+    return false;
   }
 }

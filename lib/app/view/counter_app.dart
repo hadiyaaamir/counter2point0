@@ -8,7 +8,7 @@ class CounterApp extends StatefulWidget {
 }
 
 class _CounterAppState extends State<CounterApp> {
-  final ThemeController themeController = ThemeController(counterValue: 0);
+  final ThemeController themeController = ThemeController();
 
   @override
   void dispose() {
@@ -17,27 +17,23 @@ class _CounterAppState extends State<CounterApp> {
   }
 
   @override
-  void initState() {
-    super.initState();
-
-    themeController.addListener(() {
-      setState(() {});
-    });
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return ThemeInherited(
+    return ListenableBuilder(
       listenable: themeController,
-      child: MaterialApp(
-        title: 'Counter 2.0',
-        themeMode: themeController.theme.themeMode,
-        home: AnimatedTheme(
-          data: themeController.theme.themeData,
-          duration: const Duration(milliseconds: 500),
-          child: const CounterScreen(),
-        ),
-      ),
+      builder: (BuildContext context, Widget? child) {
+        return ThemeInherited(
+          listenable: themeController,
+          child: MaterialApp(
+            title: 'Counter 2.0',
+            themeMode: themeController.theme.themeMode,
+            home: AnimatedTheme(
+              data: themeController.theme.themeData,
+              duration: const Duration(milliseconds: 500),
+              child: const CounterScreen(),
+            ),
+          ),
+        );
+      },
     );
   }
 }

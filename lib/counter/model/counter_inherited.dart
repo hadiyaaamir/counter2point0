@@ -18,6 +18,6 @@ class CounterInherited extends InheritedWidget {
 
   @override
   bool updateShouldNotify(CounterInherited oldWidget) {
-    return listenable.stateChanged;
+    return false;
   }
 }

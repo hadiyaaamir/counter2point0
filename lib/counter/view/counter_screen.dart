@@ -32,11 +32,14 @@ class _CounterScreenState extends State<CounterScreen> {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         ScaffoldMessenger.of(context).showSnackBar(snackBar);
       });
+    } else {
+      ScaffoldMessenger.of(context).hideCurrentSnackBar();
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    checkSnackbar(counterController.counter);
     return CounterInherited(
       listenable: counterController,
       child: Scaffold(
@@ -46,23 +49,18 @@ class _CounterScreenState extends State<CounterScreen> {
           centerTitle: true,
           actions: const [ThemeButton()],
         ),
-        body: ListenableBuilder(
-            listenable: counterController,
-            builder: (BuildContext context, Widget? child) {
-              checkSnackbar(counterController.counter);
-              return Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Text(
-                      'This is the current counter value:',
-                      style: Theme.of(context).textTheme.bodyLarge,
-                    ),
-                    const EditableCounter(),
-                  ],
-                ),
-              );
-            }),
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Text(
+                'This is the current counter value:',
+                style: Theme.of(context).textTheme.bodyLarge,
+              ),
+              const EditableCounter(),
+            ],
+          ),
+        ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
         floatingActionButton: const ButtonsRow(),
       ),

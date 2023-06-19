@@ -4,13 +4,11 @@ class ListenableInherited<T extends ChangeNotifier> extends StatefulWidget {
   const ListenableInherited({
     super.key,
     required this.controller,
-    required this.child,
-    required this.update,
+    required this.childBuilder,
   });
 
   final T controller;
-  final Widget child;
-  final Function() update;
+  final Widget Function(T) childBuilder;
 
   @override
   State<ListenableInherited<T>> createState() => _ListenableInheritedState<T>();
@@ -19,18 +17,21 @@ class ListenableInherited<T extends ChangeNotifier> extends StatefulWidget {
 class _ListenableInheritedState<T extends ChangeNotifier>
     extends State<ListenableInherited<T>> {
   @override
-  void initState() {
-    super.initState();
-    widget.controller.addListener(() {
-      widget.update();
-    });
+  void dispose() {
+    super.dispose();
+    widget.controller.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return MyInheritedWidget<T>(
+    return ListenableBuilder(
       listenable: widget.controller,
-      child: widget.child,
+      builder: (BuildContext context, Widget? child) {
+        return MyInheritedWidget<T>(
+          listenable: widget.controller,
+          child: widget.childBuilder(widget.controller),
+        );
+      },
     );
   }
 }

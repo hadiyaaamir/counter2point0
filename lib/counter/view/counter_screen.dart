@@ -30,32 +30,34 @@ class _CounterScreenState extends State<CounterScreen> {
 
   @override
   Widget build(BuildContext context) {
-    checkSnackbar(counterController.counter);
     return ListenableInherited<CounterController>(
       controller: counterController,
-      child: Scaffold(
-        appBar: AppBar(
-          backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-          title: const Text('Counter 2.0'),
-          centerTitle: true,
-          actions: const [ThemeButton()],
-        ),
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Text(
-                'This is the current counter value:',
-                style: Theme.of(context).textTheme.bodyLarge,
-              ),
-              const EditableCounter(),
-            ],
+      childBuilder: (counterController) {
+        checkSnackbar(counterController.counter);
+        return Scaffold(
+          appBar: AppBar(
+            backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+            title: const Text('Counter 2.0'),
+            centerTitle: true,
+            actions: const [ThemeButton()],
           ),
-        ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-        floatingActionButton: const ButtonsRow(),
-      ),
-      update: () => setState(() {}),
+          body: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  'This is the current counter value:',
+                  style: Theme.of(context).textTheme.bodyLarge,
+                ),
+                const EditableCounter(),
+              ],
+            ),
+          ),
+          floatingActionButtonLocation:
+              FloatingActionButtonLocation.centerFloat,
+          floatingActionButton: const ButtonsRow(),
+        );
+      },
     );
   }
 }

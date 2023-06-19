@@ -30,32 +30,35 @@ class _CounterScreenState extends State<CounterScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return ListenableInherited<CounterController>(
-      controller: counterController,
-      childBuilder: (counterController) {
+    return ListenableBuilder(
+      listenable: counterController,
+      builder: (BuildContext context, Widget? child) {
         checkSnackbar(counterController.counter);
-        return Scaffold(
-          appBar: AppBar(
-            backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-            title: const Text('Counter 2.0'),
-            centerTitle: true,
-            actions: const [ThemeButton()],
-          ),
-          body: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Text(
-                  'This is the current counter value:',
-                  style: Theme.of(context).textTheme.bodyLarge,
-                ),
-                const EditableCounter(),
-              ],
+        return CustomInheritedWidget<CounterController>(
+          listenable: counterController,
+          child: Scaffold(
+            appBar: AppBar(
+              backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+              title: const Text('Counter 2.0'),
+              centerTitle: true,
+              actions: const [ThemeButton()],
             ),
+            body: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Text(
+                    'This is the current counter value:',
+                    style: Theme.of(context).textTheme.bodyLarge,
+                  ),
+                  const EditableCounter(),
+                ],
+              ),
+            ),
+            floatingActionButtonLocation:
+                FloatingActionButtonLocation.centerFloat,
+            floatingActionButton: const ButtonsRow(),
           ),
-          floatingActionButtonLocation:
-              FloatingActionButtonLocation.centerFloat,
-          floatingActionButton: const ButtonsRow(),
         );
       },
     );

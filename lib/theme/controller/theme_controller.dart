@@ -12,11 +12,4 @@ class ThemeController extends ChangeNotifier {
     isDarkMode ? _themeMode = ThemeMode.light : _themeMode = ThemeMode.dark;
     notifyListeners();
   }
-
-  TextStyle getCounterTextStyle(int value) {
-    return TextStyle(
-      color: theme.counterTheme.counterColor(value),
-      fontSize: theme.counterTheme.counterFont(value),
-    );
-  }
 }

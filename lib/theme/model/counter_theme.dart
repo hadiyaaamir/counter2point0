@@ -19,6 +19,13 @@ abstract class CounterTheme {
 
     return color;
   }
+
+  TextStyle getCounterTextStyle(int value) {
+    return TextStyle(
+      color: counterColor(value),
+      fontSize: counterFont(value),
+    );
+  }
 }
 
 class CounterThemeLight extends CounterTheme {

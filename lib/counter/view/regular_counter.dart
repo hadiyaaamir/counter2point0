@@ -8,10 +8,10 @@ class RegularCounter extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeController themeController =
-        MyInheritedWidget.of<ThemeController>(context).listenable;
+        CustomInheritedWidget.of<ThemeController>(context).listenable;
 
     final CounterController counterController =
-        MyInheritedWidget.of<CounterController>(context).listenable;
+        CustomInheritedWidget.of<CounterController>(context).listenable;
 
     return ListenableBuilder(
       listenable: themeController,

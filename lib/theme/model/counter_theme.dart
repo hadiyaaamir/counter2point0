@@ -1,9 +1,9 @@
 part of 'model.dart';
 
 abstract class CounterTheme {
-  Color counterColor(int value);
+  Color _counterColor(int value);
 
-  double counterFont(int value) {
+  double _counterFont(int value) {
     int numbers = kMaxValue - kMinValue + 1;
     double sizeFactor = (kMaxFont - kMinFont) / numbers;
     int myNumber = (value - kMinValue + 1);
@@ -22,15 +22,15 @@ abstract class CounterTheme {
 
   TextStyle getCounterTextStyle(int value) {
     return TextStyle(
-      color: counterColor(value),
-      fontSize: counterFont(value),
+      color: _counterColor(value),
+      fontSize: _counterFont(value),
     );
   }
 }
 
 class CounterThemeLight extends CounterTheme {
   @override
-  Color counterColor(int value) {
+  Color _counterColor(int value) {
     int color = super._getColorIntensity(value);
     return Color.fromARGB(255, color, 0, 0);
   }
@@ -38,7 +38,7 @@ class CounterThemeLight extends CounterTheme {
 
 class CounterThemeDark extends CounterTheme {
   @override
-  Color counterColor(int value) {
+  Color _counterColor(int value) {
     int color = super._getColorIntensity(value);
     return Color.fromARGB(255, 255, 255 - color, 255 - color);
   }

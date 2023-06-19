@@ -16,9 +16,9 @@ class _TextfieldCounterState extends State<TextfieldCounter> {
   @override
   Widget build(BuildContext context) {
     final CounterController counterController =
-        MyInheritedWidget.of<CounterController>(context).listenable;
+        CustomInheritedWidget.of<CounterController>(context).listenable;
     final ThemeController themeController =
-        MyInheritedWidget.of<ThemeController>(context).listenable;
+        CustomInheritedWidget.of<ThemeController>(context).listenable;
     return ListenableBuilder(
       listenable: counterController,
       builder: (BuildContext context, Widget? child) {

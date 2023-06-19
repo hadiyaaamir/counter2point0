@@ -1,1 +1,1 @@
-export 'my_inherited_widget.dart';
+export 'custom_inherited_widget.dart';

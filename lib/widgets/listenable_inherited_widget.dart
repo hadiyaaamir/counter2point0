@@ -27,7 +27,7 @@ class _ListenableInheritedState<T extends ChangeNotifier>
     return ListenableBuilder(
       listenable: widget.controller,
       builder: (BuildContext context, Widget? child) {
-        return MyInheritedWidget<T>(
+        return CustomInheritedWidget<T>(
           listenable: widget.controller,
           child: widget.childBuilder(widget.controller),
         );

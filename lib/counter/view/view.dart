@@ -1,5 +1,5 @@
 import 'package:counter2point0/counter/widgets/widgets.dart';
-import 'package:counter2point0/models/models.dart';
+import 'package:counter2point0/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:counter2point0/counter/counter.dart';
 import 'package:counter2point0/theme/theme.dart';

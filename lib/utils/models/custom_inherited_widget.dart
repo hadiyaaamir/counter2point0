@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+part of 'models.dart';
 
 class CustomInheritedWidget<T extends ChangeNotifier> extends InheritedWidget {
   final T listenable;

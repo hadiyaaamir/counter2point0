@@ -30,13 +30,13 @@ class _CounterScreenState extends State<CounterScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return ListenableBuilder(
+    return CustomInheritedWidget<CounterController>(
       listenable: counterController,
-      builder: (BuildContext context, Widget? child) {
-        checkSnackbar(counterController.counter);
-        return CustomInheritedWidget<CounterController>(
-          listenable: counterController,
-          child: Scaffold(
+      child: ListenableBuilder(
+        listenable: counterController,
+        builder: (BuildContext context, Widget? child) {
+          checkSnackbar(counterController.counter);
+          return Scaffold(
             appBar: AppBar(
               backgroundColor: Theme.of(context).colorScheme.inversePrimary,
               title: const Text('Counter 2.0'),
@@ -58,9 +58,9 @@ class _CounterScreenState extends State<CounterScreen> {
             floatingActionButtonLocation:
                 FloatingActionButtonLocation.centerFloat,
             floatingActionButton: const ButtonsRow(),
-          ),
-        );
-      },
+          );
+        },
+      ),
     );
   }
 }

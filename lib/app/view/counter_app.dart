@@ -18,12 +18,12 @@ class _CounterAppState extends State<CounterApp> {
 
   @override
   Widget build(BuildContext context) {
-    return ListenableBuilder(
+    return CustomInheritedWidget<ThemeController>(
       listenable: themeController,
-      builder: (BuildContext context, Widget? child) {
-        return CustomInheritedWidget<ThemeController>(
-          listenable: themeController,
-          child: MaterialApp(
+      child: ListenableBuilder(
+        listenable: themeController,
+        builder: (BuildContext context, Widget? child) {
+          return MaterialApp(
             title: 'Counter 2.0',
             themeMode: themeController.themeMode,
             home: AnimatedTheme(
@@ -31,9 +31,9 @@ class _CounterAppState extends State<CounterApp> {
               duration: const Duration(milliseconds: 500),
               child: const CounterScreen(),
             ),
-          ),
-        );
-      },
+          );
+        },
+      ),
     );
   }
 }

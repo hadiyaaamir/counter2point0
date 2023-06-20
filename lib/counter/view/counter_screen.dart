@@ -35,6 +35,9 @@ class _CounterScreenState extends State<CounterScreen> {
       child: ListenableBuilder(
         listenable: counterController,
         builder: (BuildContext context, Widget? child) {
+          CounterController counterController =
+              CustomInheritedWidget.of<CounterController>(context).listenable;
+
           checkSnackbar(counterController.counter);
           return Scaffold(
             appBar: AppBar(
